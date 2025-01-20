@@ -5,52 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reveal More</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        .container {
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            overflow: hidden;
-
-            .custom_gallery {
-                height: fit-content;
-                width: fit-content;
-                display: grid;
-                grid-template-columns: 1fr 1fr 1fr;
-                grid-template-rows: 200px 200px;
-                gap: 10px;
-
-                .custom_gallery_item {
-                    width: 200px;
-                    height: 200px;
-                    object-fit: cover;
-                    border-radius: 5px;
-                    box-shadow: rgba(155, 155, 155, 0.16) 0px 1px 4px;
-                }
-
-                .extra-element {
-                    padding: 20px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-
-                    p {
-                        font-size: 22px;
-                        text-align: center;
-                    }
-                }
-
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -65,49 +20,7 @@
             <img src="/public/images/placeholder.jpg" class="custom_gallery_item">
         </div>
     </div>
-
-    <script>
-        let gallery = document.querySelector('.custom_gallery');
-        let images = Array.from(document.querySelectorAll('.custom_gallery_item'));
-        let maxItems = document.querySelector('.custom_gallery').getAttribute('data-max-images');
-
-        let maxImages = maxItems;
-        
-        if (images.length > maxImages) {
-            maxImages = maxItems - 1;
-        }
-
-        let imagesToShow = images.slice(0, maxImages);
-        let extraCount = images.length - imagesToShow.length;
-
-        gallery.innerHTML = '';
-
-        const genrateImages = () => {
-            let imageHTML = imagesToShow.map(img => {
-                return `
-                   <img src='${img.currentSrc}' class="custom_gallery_item">
-                `;
-            }).join('');
-
-            if (extraCount > 0) {
-                return imageHTML + `
-                      <div class="custom_gallery_item extra-element">
-                         <p>See ${extraCount} More Images</p>
-                      </div> `;
-            } else {
-                return imageHTML;
-            }
-
-        };
-
-        const generateGallery = () => {
-            let items = genrateImages();
-            gallery.innerHTML = items;
-        };
-
-        generateGallery();
-
-    </script>
+    <script src="index.js"></script>
 </body>
 
 </html>
